@@ -1,0 +1,18 @@
+spring:
+  application.name: auth-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chlora
+    username: postgres
+    password: root
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info
+
+security:
+  jwt:
+    private-key: file:src/main/resources/keys/private-key.pem
+    public-key: file:src/main/resources/keys/public-key.pem

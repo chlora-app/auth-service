@@ -1,0 +1,21 @@
+spring:
+  application.name: ${SPRING_APPLICATION_NAME:auth-service}
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/chlora}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
+
+  jackson:
+    property-naming-strategy: ${SPRING_JACKSON_PROPERTY_NAMING_STRATEGY:LOWER_CAMEL_CASE}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE:prometheus,health,info}
+
+security:
+  jwt:
+    private-key: ${SECURITY_JWT_PRIVATE_KEY_PATH:file:src/main/resources/keys/private-key.pem}
+    public-key: ${SECURITY_JWT_PUBLIC_KEY_PATH:file:src/main/resources/keys/public-key.pem}
