@@ -1,0 +1,56 @@
+spring:
+  application.name: auth-service-test
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chlora
+    username: postgres
+    password: root
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info
+
+security:
+  jwt:
+    private-key: |
+      -----BEGIN PRIVATE KEY-----
+      MIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQCOkgMyudEId5U6
+      dCFpWzQcggHy3B2HKZU+5rjCl957xVMDdu6DzO5h2160yyzGFeY+wVDCshS0R70B
+      sPYRiyUYwJGbCDPoosDw/W81ixOJutY6D2ffMJAH4QaZbu62m/PS0rohJj7MtRtH
+      mQ4AorSKN0L50IjKGRuFGroEfP/wn+6trmKHp/PzkvRpCM3L11I7GAIB0Korlnez
+      MEWoh9RNCv1PJunGzz02YdLyMitntJjrHz8UeG/hKNUU7/tR24CybHam5uc1CdbD
+      P92Pn637+8/I8K/LKPMOteBjmVwQdnndZiM3w5t9txgMaSBVvD2onEqBoxa1DN4+
+      IkFvLviBAgMBAAECgf9ReImbUylrTUAER0NQkW3AsgpVs14Bqcw/mwO52k9T1fm6
+      NnHWSiVvMOIjLnec5VF4SxV7gjLn/UFk1gXHwLFSPmOhKZmANyv1NYjMxXeaHR/j
+      zdSYa4fi+L8XWZfQLQ5doKNR435qPJQk4LG/wJAAQSlk2GX9bJuX/yM4WAtp1SCW
+      XX/o4IUeoNpXSVeBQ6ef0QAh4hX0JxqOt0+FDslTDpT+uEfd2bushm84Odyhduy3
+      P+9Lm6cy/TJqYpLTFe9qVhe2trfg9gYsY+wP1AGGDHAfeJ48aCjwPDKWswwCLlLo
+      mmjYn5DrBSBS3P0jDwzNKB1uVQQGH7APu5g0GgECgYEAwAXX1x+xKWRwRZlN0Anj
+      iHKEaNei0WknuReauneyJPf88g5iS3b9uwDkwNJ/xx2JvtYM00BMhjdQX6F86odY
+      WDLoCUUk2o+H86Vd3IOcQnqLXq1ZtJfmbsfc0Rovj4AijyQLBb/meiF6S/ni2Ngl
+      IRD0VGTXnZqLP7jZJgwvbUECgYEAvhI7c1+4yrX1KOw26pTsuk1UdJQuMbVBXVZp
+      qWbgFg4XnQ/4j5PoqqIdlTtXi2dFqPzHM9M4w0ifHJcbS+v+JYG9boirDgQN59bx
+      E26Xm5itGaz+K3ihRJonNDKgLJeDF/4YbPW6bluTj1Es/xZC3GGhQPy7hnrfdA1o
+      n9Yme0ECgYAH03UjiGAhDr3gqEnak7yZQAmTeE5jeISs74BX3y78gLrnZpys9LGM
+      oJGyJiIdDGAjzfeB2JoF0lVNQHil2lRIa/K3BgFlgvoIfRHhPd/tea8acbg5OwOi
+      OjUOtKGBmLhP2ykz18ld6uVgGVQcgFqrCVTb56w9+SF5vF/lRBPewQKBgFEMoUE/
+      biMymAoNQBWjz5ZZ50uW7GPR8L+GW6Qa9C8zbypQZyOCZNJuMsMx/NC7Bt9aeu9E
+      gI31Z7PfU4p6ZXNE8awypw5g+DUGWOJ6ZDe7UQUD2ZZb6BjCyzjc5aReL06J0YyU
+      9Bye/Ds+2DsmGPi0wPhfTO+5cZOhLB4MSXiBAoGACMehU8b8lLnu2uGbu9IRCaPp
+      /i+Bk9AZ3+Ql+X/KPXhZBUazmGw8HPnLRw6I8jVf/1jvrrX+1TgNli+6Udock798
+      iX9sAPxgbRcvoABQp/dhgqWvnolHwgUb/XrPGcqjJ3rV09ccL6RITKZykXmmgu/B
+      se4hxKKyao59uDiPz8I=
+      -----END PRIVATE KEY-----
+    public-key: |
+      -----BEGIN PUBLIC KEY-----
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjpIDMrnRCHeVOnQhaVs0
+      HIIB8twdhymVPua4wpfee8VTA3bug8zuYdtetMssxhXmPsFQwrIUtEe9AbD2EYsl
+      GMCRmwgz6KLA8P1vNYsTibrWOg9n3zCQB+EGmW7utpvz0tK6ISY+zLUbR5kOAKK0
+      ijdC+dCIyhkbhRq6BHz/8J/ura5ih6fz85L0aQjNy9dSOxgCAdCqK5Z3szBFqIfU
+      TQr9Tybpxs89NmHS8jIrZ7SY6x8/FHhv4SjVFO/7UduAsmx2pubnNQnWwz/dj5+t
+      +/vPyPCvyyjzDrXgY5lcEHZ53WYjN8ObfbcYDGkgVbw9qJxKgaMWtQzePiJBby74
+      gQIDAQAB
+      -----END PUBLIC KEY-----
+    
