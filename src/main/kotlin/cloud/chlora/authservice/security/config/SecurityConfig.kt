@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.oauth2.server.resource.web.BearerTokenResolver
 import org.springframework.security.web.SecurityFilterChain
@@ -14,6 +15,7 @@ import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
+@EnableWebSecurity
 class SecurityConfig {
 
     @Bean
@@ -22,11 +24,14 @@ class SecurityConfig {
         cookieBearerTokenResolver: BearerTokenResolver
     ): SecurityFilterChain {
 
-        http.cors {}
-            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+        http
+            .cors { }
             .csrf { it.disable() }
-            .cors {  }
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            }
             .authorizeHttpRequests {
+                it.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 it.requestMatchers("/actuator/health", "/actuator/prometheus").permitAll()
                 it.requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
                 it.anyRequest().authenticated()
@@ -41,22 +46,22 @@ class SecurityConfig {
 
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
-//        val config = CorsConfiguration()
-//        config.allowedOriginPatterns = listOf("https://chlora.cloud")
-//        config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
-//        config.allowedHeaders = listOf("*")
-//        config.allowCredentials = true
-//
-//        val source = UrlBasedCorsConfigurationSource()
-//        source.registerCorsConfiguration("/**", config)
-//
-//        return source
 
         val config = CorsConfiguration()
-        config.allowedOrigins = listOf("*")
-        config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
+
+        config.allowedOriginPatterns = listOf(
+            "http://localhost:5173",
+            "https://plantya-dev.vercel.app",
+            "https://chlora.cloud"
+        )
+
+        config.allowedMethods = listOf(
+            "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"
+        )
+
         config.allowedHeaders = listOf("*")
-        config.allowCredentials = false
+        config.allowCredentials = true
+        config.maxAge = 3600
 
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", config)
@@ -73,4 +78,3 @@ class SecurityConfig {
         }
     }
 }
-

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import cloud.chlora.authservice.common.response.ErrorResponse
+import org.springframework.web.bind.MethodArgumentNotValidException
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
@@ -33,5 +34,17 @@ class GlobalExceptionHandler {
     fun handleEmailExists(ex: AuthException.EmailAlreadyRegisteredException): ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(HttpStatus.CONFLICT)
             .body(ErrorResponse(AuthErrorCode.EMAIL_EXISTS.code, ex.message!!))
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException::class)
+    fun handleValidation(ex: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> {
+        val errorMessage = ex.bindingResult
+            .fieldErrors
+            .firstOrNull()
+            ?.defaultMessage
+            ?: "Validation failed."
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(ErrorResponse(AuthErrorCode.VALIDATION_ERROR.code, errorMessage))
     }
 }
