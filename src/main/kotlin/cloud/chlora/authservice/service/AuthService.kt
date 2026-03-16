@@ -43,6 +43,11 @@ class AuthService(
             AuthException.UserNotFoundException(identifier)
         }
 
+        if (user.deletedAt != null) {
+            log.warn("event=login_failed reason=user_deleted login_method={} user_identifier={}", loginMethod, identifier)
+            throw AuthException.UserNotFoundException(identifier)
+        }
+
         if (!passwordEncoder.matches(request.password, user.password)) {
             log.warn(
                 "event=login_failed reason=invalid_password login_method={} user_identifier={} user_id={}",
