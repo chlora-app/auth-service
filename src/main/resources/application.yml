@@ -6,9 +6,6 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:root}
 
-  jackson:
-    property-naming-strategy: ${SPRING_JACKSON_PROPERTY_NAMING_STRATEGY:LOWER_CAMEL_CASE}
-
 management:
   endpoints:
     web:
@@ -19,3 +16,6 @@ security:
   jwt:
     private-key: ${SECURITY_JWT_PRIVATE_KEY_PATH:file:src/main/resources/keys/private-key.pem}
     public-key: ${SECURITY_JWT_PUBLIC_KEY_PATH:file:src/main/resources/keys/public-key.pem}
+
+server:
+  port: ${SERVER_PORT:8080}
